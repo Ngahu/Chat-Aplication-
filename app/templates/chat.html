@@ -9,3 +9,14 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.0/jquery.timeago.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script>
+        var channel = "/chat";
+
+        var socket = io.connect('http://' + document.domain + ':' + location.port + channel);
+
+        socket.on('connect', function() {
+            socket.emit('my_connection', {data: 'I\'m connected!'});
+        });
+
+        socket.on("message", function (message) {
+            refreshMessages(message);
+        });

@@ -8,3 +8,11 @@ app = Flask(__name__)
 app.debug=True
 app.config['SECRET_KEY'] = 'nuttertools'
 socketio = SocketIO(app)
+
+@app.route('/')
+def chat():
+    return render_template('chat.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')

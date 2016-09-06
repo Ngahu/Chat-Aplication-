@@ -41,3 +41,13 @@
                     }
                 });
             }
+         function sendMessage() {
+                $container = $('.media-list');
+                $container[0].scrollTop = $container[0].scrollHeight;
+                var message = $("#messageText").val();
+                var author = $.cookie("realtime-chat-nickname");
+                socket.emit('message', {data: {message: message, author: author}});
+                $("#messageText").val("");
+                $container.animate({ scrollTop: $container[0].scrollHeight }, "slow");
+            }
+        })

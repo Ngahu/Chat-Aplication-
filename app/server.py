@@ -16,3 +16,11 @@ def chat():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@socketio.on('message', namespace='/chat')
+def chat_message(message):
+    emit('message', {'data': message['data']}, broadcast = True )
+
+@socketio.on('connect', namespace='/chat')
+def test_connect():
+    emit('my response', {'data': 'Connected', 'count': 0})
